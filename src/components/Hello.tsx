@@ -1,60 +1,65 @@
-import React from 'react';
+import * as React from 'react';
 
-export interface Person {
-  readonly name: string;
-  age?: string;
-  [propsName: string]: any;
+export interface Props {
+  name: string;
+  enthusiasmLevel?: number;
 }
 
-interface NumArray {
-  [index: number]: number;
+interface State {
+  currentEnthusiasm: number;
 }
 
-let tom: Person = {
-  name: 'abc',
-  // age: [1, 2],
-  height: '22',
-};
-
-// tom.name = 'yy'
-enum Color {
-  Red,
-  Gre,
-  Blue = 'red'.length,
-}
-
-class Animal {
-  /* constructor(name: string) {
-    this.name = name;
-  } */
-  public name: string;
-  public constructor(name: string) {
-    this.name = name;
+class Hello extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = { currentEnthusiasm: props.enthusiasmLevel || 1 };
   }
-  sayHi(): string {
-    return `My name is ${this.name}`;
-  }
-}
 
-let a: Animal = new Animal('Jack');
-// a.name = 'Tom';
+  onIncrement = () => {
+    this.updateEnthusiasmLevel(this.state.currentEnthusiasm + 1);
+  };
+  onDecrement = () => {
+    this.updateEnthusiasmLevel(this.state.currentEnthusiasm - 1);
+  };
 
-class Cat extends Animal {
-  constructor(name: string) {
-    super(name);
-    console.log(this.name);
-  }
-}
+  updateEnthusiasmLevel = (currentEnthusiasm: number) => {
+    this.setState({ currentEnthusiasm });
+  };
 
-let C = new Cat('Tom');
-console.log('C.sayHi() :', C.name);
-
-export class Hello extends React.Component<Person, {}> {
   render() {
+    const { name, enthusiasmLevel = 1 } = this.props;
+
+    if (enthusiasmLevel <= 0) {
+      throw new Error('you could be a little more enthusiastic. :D');
+    }
     return (
-      <h1>
-        Hello form {this.props.name} and {this.props.age}!
-      </h1>
+      <div className="hello">
+        <div className="greeting">
+          Hello {name + getExclamationMarks(this.state.currentEnthusiasm)}
+        </div>
+        <button onClick={this.onDecrement}>-</button>
+        <button onClick={this.onIncrement}>+</button>
+      </div>
     );
   }
+}
+
+/* function Hello({ name, enthusiasmLevel = 1 }: Props) {
+  if (enthusiasmLevel <= 0) {
+    throw new Error('you could be a little more enthusiastic. :D');
+  }
+
+  return (
+    <div className="hello">
+      <div className="greeting">
+        Hello {name + getExclamationMarks(enthusiasmLevel)}
+      </div>
+    </div>
+  );
+} */
+
+export default Hello;
+
+function getExclamationMarks(numChars: number) {
+  return Array(numChars + 1).join('!');
 }
