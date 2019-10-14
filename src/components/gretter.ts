@@ -15,7 +15,7 @@ interface IPerson {
 }
 
 function gretter(person: IPerson) {
-  return `Hello ${person}`;
+  return `Hello ${person.firstName} ${person.lastName}`;
 }
 
 let user = new User('sam', 'wangs');
