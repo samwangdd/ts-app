@@ -19,6 +19,9 @@ class Hello extends React.Component<Props, State> {
     this.updateEnthusiasmLevel(this.state.currentEnthusiasm + 1);
   };
   onDecrement = () => {
+    if (this.state.currentEnthusiasm < 1) {
+      return;
+    }
     this.updateEnthusiasmLevel(this.state.currentEnthusiasm - 1);
   };
 
