@@ -88,3 +88,40 @@ interface ISquare extends IShape {
 let square = <ISquare>{};
 square.color = 'blue';
 // square.width = 22;
+
+/* ----------混合类型------------ */
+interface Counter {
+  (start: number): string;
+  interval: number;
+  reset(): void;
+}
+
+function getCounter(): Counter {
+  let counter = <Counter>function(s: number) {
+    console.log('s :', counter);
+  };
+  counter.interval = 123;
+  counter.reset = function () { };
+  return counter;
+}
+
+let c = getCounter();
+c(10);
+c.reset();
+c.interval = 5.0
+// PS: 在使用JavaScript第三方库的时候，你可能需要像上面那样去完整地定义类型。
+
+/* -----------接口继承类----------- */
+class Control {
+  private state: any;
+}
+
+// 接口同样会继承类中具有的private或protected成员
+interface SelectableControl extends Control {
+  select(): void;
+}
+// 接口只能由类本身或他的子类实现
+class Button extends Control implements SelectableControl {
+  select() {}
+}
+

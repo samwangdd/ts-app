@@ -55,4 +55,17 @@ var AnalogClock = /** @class */ (function () {
 }());
 var digitalClock = createClock(DigitalClock, 12, 12);
 digitalClock.tick();
-// console.log('digitalClock :', digitalClock.tick());
+var square = {};
+square.color = 'blue';
+function getCounter() {
+    var counter = function (s) {
+        console.log('s :', counter);
+    };
+    counter.interval = 123;
+    counter.reset = function () { };
+    return counter;
+}
+var c = getCounter();
+c(10);
+c.reset();
+c.interval = 5.0;
