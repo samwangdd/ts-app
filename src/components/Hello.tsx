@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { compose, Compose } from '../utils/function';
 
 export interface Props {
   name: string;
@@ -31,14 +32,15 @@ class Hello extends React.Component<Props, State> {
 
   render() {
     const { name, enthusiasmLevel = 1 } = this.props;
-
+    const setMark = Compose('1');
+    console.log('setMark :', setMark('1'));
     if (enthusiasmLevel <= 0) {
       throw new Error('you could be a little more enthusiastic. :D');
     }
     return (
       <div className="hello">
         <div className="greeting">
-          Hello {name + getExclamationMarks(this.state.currentEnthusiasm)}
+          Hello {name + setMark(this.state.currentEnthusiasm)}
         </div>
         <button onClick={this.onDecrement}>-</button>
         <button onClick={this.onIncrement}>+</button>
@@ -47,22 +49,19 @@ class Hello extends React.Component<Props, State> {
   }
 }
 
-/* function Hello({ name, enthusiasmLevel = 1 }: Props) {
-  if (enthusiasmLevel <= 0) {
-    throw new Error('you could be a little more enthusiastic. :D');
-  }
-
-  return (
-    <div className="hello">
-      <div className="greeting">
-        Hello {name + getExclamationMarks(enthusiasmLevel)}
-      </div>
-    </div>
-  );
-} */
-
 export default Hello;
 
-function getExclamationMarks(numChars: number) {
-  return Array(numChars + 1).join('!');
+const getLength = (params: number) => {
+  console.log('setMark :', 2);
+  return new Array(params + 1);
+};
+
+const getMark = (params: Array<string>) => {
+  console.log('setMark :', 3);
+  return params.join('!');
+};
+
+const toUpperCase = (params: string) => {
+  console.log('setMark :', 1);
+  return params.toUpperCase();
 }
