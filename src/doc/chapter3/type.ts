@@ -45,4 +45,8 @@ declare function create(o: object | null): void;
 create({ props: 1 });
 create(null);
 
-// 断言
+// 断言，类似于类型转换
+let someValue: any = "this is a string";
+let strLength: number = (<string>someValue).length
+
+let strLen: number = (someValue as string).length
