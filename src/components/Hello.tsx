@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { compose, Compose } from '../utils/function';
+import { Compose } from '../utils/function';
+import { bar } from '../utils/call';
 
 export interface Props {
   name: string;
@@ -32,7 +33,11 @@ class Hello extends React.Component<Props, State> {
 
   render() {
     const { name, enthusiasmLevel = 1 } = this.props;
-    const setMark = Compose('1');
+    const setMark = Compose(getLength, getMark, toUpperCase);
+    const foo = {
+      value: 1,
+    };
+
     console.log('setMark :', setMark('1'));
     if (enthusiasmLevel <= 0) {
       throw new Error('you could be a little more enthusiastic. :D');
@@ -44,6 +49,7 @@ class Hello extends React.Component<Props, State> {
         </div>
         <button onClick={this.onDecrement}>-</button>
         <button onClick={this.onIncrement}>+</button>
+        {console.log('bar(null) :', bar.Call(null))}
       </div>
     );
   }
@@ -64,4 +70,4 @@ const getMark = (params: Array<string>) => {
 const toUpperCase = (params: string) => {
   console.log('setMark :', 1);
   return params.toUpperCase();
-}
+};
