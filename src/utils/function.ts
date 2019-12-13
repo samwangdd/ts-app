@@ -59,13 +59,13 @@ export const deepMerge = (
 };
 
 /**
- * 深拷贝
+ * 深拷贝-A
  * @param target 目标对象
  */
 export function clone(target: any, map = new WeakMap()) {
   if (typeof target === 'object') {
     // 兼容数组
-    let cloneTarget = Array.isArray(target) ? [] : {};
+    let cloneTarget = new target.constructor();
     // 通过map开辟新储存空间，兼容循环引用
     if (map.get(target)) {
       return map.get(target);
@@ -73,7 +73,6 @@ export function clone(target: any, map = new WeakMap()) {
     // key为target，value为cloneTarget
     map.set(target, cloneTarget);
     for (const key in target) {
-      // @ts-ignore
       cloneTarget[key] = clone(target[key], map);
     }
     return cloneTarget;
@@ -82,7 +81,12 @@ export function clone(target: any, map = new WeakMap()) {
   }
 }
 
-function deepClone(obj: any, hash = new WeakMap()) {
+/**
+ * 深拷贝-B
+ * @param obj 目标对象
+ * @param hash
+ */
+export function deepClone(obj: any, hash = new WeakMap()) {
   if (typeof obj !== 'object') return obj;
   if (hash.get(obj)) return hash.get(obj);
   if (obj instanceof Date) return new Date(obj);
@@ -98,7 +102,7 @@ function deepClone(obj: any, hash = new WeakMap()) {
       cloneObj[key] = deepClone(value, hash);
     }
   }
-  
+
   return cloneObj;
 }
 
