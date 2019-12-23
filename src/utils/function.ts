@@ -87,11 +87,14 @@ export function clone(target: any, map = new WeakMap()) {
  * @param hash
  */
 export function deepClone(obj: any, hash = new WeakMap()) {
+  // 如果是函数也直接返回
   if (typeof obj !== 'object') return obj;
+  // 利用WeakMap做储存，防止循环引用
   if (hash.get(obj)) return hash.get(obj);
+  // 特殊对象：Date, RegExp
   if (obj instanceof Date) return new Date(obj);
   if (obj instanceof RegExp) return new RegExp(obj);
-
+  // 初始化属性值，如果是对象为 {}，如果是数组为 []
   const cloneObj = new obj.constructor();
 
   hash.set(obj, cloneObj);
