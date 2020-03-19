@@ -80,7 +80,7 @@ class Hello extends React.Component<Props, State> {
           Hello {name + setMark(this.state.currentEnthusiasm)}
         </div>
         <button onClick={this.onDecrement}>-</button>
-        <button onClick={this.onIncrement}>+</button>
+        <button onClick={this.onIncrement} id="increment">+</button>
       </div>
     );
   }
