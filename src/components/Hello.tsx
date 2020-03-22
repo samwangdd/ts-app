@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { compose, pipeAsync, deepMerge } from '../utils/function';
+import style from './hello.css';
 
 const sum = pipeAsync(
   (x: number) => x + 1,
@@ -75,12 +76,9 @@ class Hello extends React.Component<Props, State> {
       throw new Error('you could be a little more enthusiastic. :D');
     }
     return (
-      <div className="hello">
-        <div className="greeting">
-          Hello {name + setMark(this.state.currentEnthusiasm)}
-        </div>
-        <button onClick={this.onDecrement}>-</button>
-        <button onClick={this.onIncrement}>+</button>
+      <div>
+        <div className={style.header}>Header</div>
+        <div className={style.footer}>Footer</div>
       </div>
     );
   }
