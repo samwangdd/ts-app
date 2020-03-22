@@ -1,5 +1,7 @@
 import * as React from 'react';
+
 import { compose, pipeAsync, deepMerge } from '../utils/function';
+import { objectFactory1 } from '../utils/new';
 import style from './hello.css';
 
 const sum = pipeAsync(
@@ -57,14 +59,7 @@ class Hello extends React.Component<Props, State> {
         age: 1,
       },
     };
-    // const obj3 = deepMerge({}, [obj1, obj2], true);
-    const obj4 = Object.assign({}, obj2);
-    obj2.language = [111];
-    obj4.child.age = 10;
-    console.log('obj1 :', obj1);
-    console.log('obj2 :', obj2);
-    // console.log('obj3 :', obj3);
-    console.log('obj4 :', obj4);
+    
     const { name, enthusiasmLevel = 1 } = this.props;
     const setMark = compose(getLength, getMark, toUpperCase);
     const foo = {
