@@ -1,3 +1,6 @@
+/**
+ * 继承--圣杯模式
+ */
 const inherit = (function() {
   const F = function() {}; // 临时构造函数
   return function(Target, Origin) {
