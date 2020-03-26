@@ -1,27 +1,44 @@
 /**
- * 防抖
+ * 防抖：将多次操作合并为一次
  * @param {function} fn
  */
 export function deBounce(fn, delay) {
   let timeOut = null;
-  console.log('deBounce :', this);
   return function() {
+    const args = Array.prototype.slice.call(arguments);
     clearTimeout(timeOut);
-    console.log('return :', this);
     timeOut = setTimeout(() => {
-      console.log('setTimeout :', this);
-      console.log('arguments :', arguments);
-      fn.apply(this, arguments);
+      fn.apply(this, args);
     }, delay);
   };
 }
 
-function sayHi() {
-  console.log('sayHi :', this);
-  console.log('防抖成功！');
+/**
+ * 节流：固定时间内只触发一次，将高频操作优化为低频操作
+ * @param {*} fn
+ * @param {*} delay
+ */
+export function throttle(fn, delay) {
+  let timer = true;
+  return function() {
+    const context = this;
+    const args = Array.prototype.slice.call(arguments);
+    if (!timer) return;
+    timer = false;
+    setTimeout(() => {
+      fn.apply(context, args);
+      timer = true;
+    }, delay);
+  };
 }
 
+// function sayHi() {
+//   console.log('sayHi :', this);
+//   console.log('防抖成功！');
+// }
+
 // window.addEventListener('scroll', deBounce(sayHi, 2000));
+// window.addEventListener('mouseover', throttle(sayHi, 2000));
 
 export function DeepClone(obj, hash = new WeakMap()) {
   if (typeof obj !== 'object') return obj;
