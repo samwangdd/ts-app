@@ -66,7 +66,7 @@ export function DeepClone(obj, hash = new WeakMap()) {
  * 判断传入对象的数据类型
  * @param {*} params
  */
-function type(obj) {
+export function type(obj) {
   if (obj === null) return String(obj);
   const exception = ['Array', 'Regxp', 'Date', 'Object', 'Error'];
   const class2type = {};
