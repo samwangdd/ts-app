@@ -1,7 +1,6 @@
 import * as React from 'react';
 
-import { compose, pipeAsync, deepMerge } from '../utils/function';
-import { objectFactory1 } from '../utils/new';
+import { compose, pipeAsync } from '../utils/function';
 import style from './hello.css';
 
 const sum = pipeAsync(
@@ -41,30 +40,8 @@ class Hello extends React.Component<Props, State> {
     this.setState({ currentEnthusiasm });
   };
   render() {
-    const obj1 = {
-      name: 'zhangsan',
-      age: '18',
-      address: (x: number) => x + 134,
-      language: [1, 2, 3, 4],
-      child: {
-        name: 'bar',
-      },
-    };
-    const obj2 = {
-      name: 'lisi',
-      age: '23',
-      address: undefined,
-      language: [1, [2, 3], 4],
-      child: {
-        age: 1,
-      },
-    };
-    
-    const { name, enthusiasmLevel = 1 } = this.props;
+    const { enthusiasmLevel = 1 } = this.props;
     const setMark = compose(getLength, getMark, toUpperCase);
-    const foo = {
-      value: 1,
-    };
 
     console.log('setMark :', setMark('1'));
     if (enthusiasmLevel <= 0) {
