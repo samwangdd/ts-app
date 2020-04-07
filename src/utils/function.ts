@@ -1,6 +1,3 @@
-import { resolve } from 'dns';
-import { object } from 'prop-types';
-
 /*
  * 函数式编程方法
  */

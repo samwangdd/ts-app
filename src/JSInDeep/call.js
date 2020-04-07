@@ -1,9 +1,9 @@
-/** 
+/**
  * 改变this指向
  * 执行函数
  * 接收参数
  * 返回值
-*/
+ */
 // eslint-disable-next-line no-extend-native
 Function.prototype.Call = function(context) {
   console.log('this :', this);
@@ -24,8 +24,8 @@ Function.prototype.Call = function(context) {
   }
   console.log('args :', args);
   // 2. 执行方法 context.fn()，应用了隐式绑定
-  // ES6写法：context.fn(...args);
   // 接收this函数的返回值
+  // ES6写法：context.fn(...args);
   const res = eval('context.fn(' + args + ')');
   // 3. 删除属性
   delete context.fn;
