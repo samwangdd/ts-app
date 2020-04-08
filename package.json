@@ -35,7 +35,6 @@
     ]
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^2.26.0",
     "css-loader": "^3.4.0",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
