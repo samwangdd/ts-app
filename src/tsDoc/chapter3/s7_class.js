@@ -1,74 +1,119 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+// export class Greeter {
+//   greeting: string;
+//   constructor(message: string) {
+//     this.greeting = message;
+//   }
+//   greet() {
+//     return 'Hello, ' + this.greeting;
+//   }
+// }
 exports.__esModule = true;
-var Greeter = /** @class */ (function () {
-    function Greeter(message) {
-        this.greeting = message;
+// let greeter = new Greeter("world");
+// greeter.greet();
+// /* -------- animal -------- */
+// class Animal {
+//   private name: string;
+//   constructor(theName: string) {
+//     this.name = theName;
+//   }
+//   move(distanceInMeters: number = 0) {
+//     console.log(`Animal moved ${distanceInMeters}m.`);
+//   }
+// }
+// class Snake extends Animal {
+//   constructor(name: string) {
+//     super(name);
+//   }
+//   move(distanceInMeters: number = 5) {
+//     console.log('Slithering...');
+//     super.move(distanceInMeters);
+//   }
+// }
+// class Horse extends Animal {
+//   constructor(name: string) {
+//     super(name);
+//   }
+//   move(distanceInMeters: number = 45) {
+//     console.log('Galloping...');
+//     super.move(distanceInMeters);
+//   }
+// }
+// let sam = new Snake("Sammy the Python");
+// let tom: Animal = new Horse("Tommy the Palomino");
+// sam.move();
+// tom.move(45);
+// /* -------- simple -------- */
+// class Dog extends Animal {
+//   bark() {
+//     console.log('Woof! Woof!');
+//   }
+// }
+// const coco = new Dog('coco');
+// coco.bark();
+// coco.move(23);
+// /* ------ private ------ */
+// class Rhino extends Animal {
+//   constructor() {
+//     super('Rhino');
+//   }
+// }
+// class Employee {
+//   private name: string;
+//   constructor(theName: string) {
+//     this.name = theName;
+//   }
+// }
+// let animal = new Animal("Goat");
+// let rhino = new Rhino();
+// let employee = new Employee("Bob");
+// animal === rhino;
+// // rhino === employee;
+var User = /** @class */ (function () {
+    // private name: string;
+    function User(_name, _email) {
+        this._name = _name;
+        this._email = _email;
+        User.assertValidName(_name);
+        //  this.name = name;
     }
-    Greeter.prototype.greet = function () {
-        return 'Hello, ' + this.greeting;
+    User.assertValidName = function (name) {
+        var nameIsValid = User.minNameLen > 3;
+        if (!nameIsValid) {
+            throw Error('the given name is not valid!');
+        }
     };
-    return Greeter;
+    Object.defineProperty(User.prototype, "name", {
+        get: function () {
+            return this._name;
+        },
+        set: function (newName) {
+            User.assertValidName(newName);
+            this._name = newName;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(User.prototype, "email", {
+        get: function () {
+            return this._email;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    User.prototype.speak = function () {
+        console.log("I'm " + this.name);
+    };
+    User.minNameLen = 4;
+    return User;
 }());
-exports.Greeter = Greeter;
-var greeter = new Greeter("world");
-greeter.greet();
-/* ---------------- */
-var Animal = /** @class */ (function () {
-    function Animal(theName) {
-        this.name = theName;
-    }
-    Animal.prototype.move = function (distanceInMeters) {
-        if (distanceInMeters === void 0) { distanceInMeters = 0; }
-        console.log("Animal moved " + distanceInMeters + "m.");
-    };
-    return Animal;
-}());
-var Snake = /** @class */ (function (_super) {
-    __extends(Snake, _super);
-    function Snake(name) {
-        return _super.call(this, name) || this;
-    }
-    Snake.prototype.move = function (distanceInMeters) {
-        if (distanceInMeters === void 0) { distanceInMeters = 5; }
-        console.log('Slithering...');
-        _super.prototype.move.call(this, distanceInMeters);
-    };
-    return Snake;
-}(Animal));
-var Horse = /** @class */ (function (_super) {
-    __extends(Horse, _super);
-    function Horse(name) {
-        return _super.call(this, name) || this;
-    }
-    Horse.prototype.move = function (distanceInMeters) {
-        if (distanceInMeters === void 0) { distanceInMeters = 45; }
-        console.log('Galloping...');
-        _super.prototype.move.call(this, distanceInMeters);
-    };
-    return Horse;
-}(Animal));
-var sam = new Snake("Sammy the Python");
-var tom = new Horse("Tommy the Palomino");
-sam.move();
-tom.move(45);
-/* class Dog extends Animal {
-  bark() {
-    console.log('Woof! Woof!');
-  }
-}
-const coco = new Dog();
-coco.bark();
-coco.move(23); */
+exports.User = User;
+var vip = new User('Groot', 'gmail');
+vip.speak();
+vip.name = 'Rocket';
+vip.speak();
+// vip.assertValidName('G');
+console.log('vip.name :>> ', vip.name);
+console.log('vip.email :>> ', vip.email);
+vip.name = 'G';
+vip.speak();
