@@ -1,9 +1,11 @@
 .header {
   height: 100px;
+  width: 100%;
   background: lightblue
 }
 
 .footer {
   height: 100px;
-  background: lightskyblue;
+  width: 100%;
+  background: lightseagreen;
 }
