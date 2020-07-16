@@ -1,4 +1,5 @@
 /* eslint-disable no-extend-native */
+// https://github.com/mqyqingfeng/Blog/issues/12
 Function.prototype.Bind = function(context) {
   const fToBind = this;
   const args = Array.prototype.slice.call(arguments, 1);
