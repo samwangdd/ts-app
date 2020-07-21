@@ -116,3 +116,16 @@ const isArray = (type: string) => type === 'Array';
 
 const isPlainObject = compose(getType, isObject);
 const isPlainArray = compose(getType, isArray);
+
+/**
+ * 函数柯里化
+ * @param fn
+ */
+export function curry(fn: Function) {
+  const inner = (...args: any[]) => {
+    return args.length >= fn.length
+      ? fn(...args)
+      : (rest: any) => inner(...args, ...rest);
+  };
+  return inner;
+}
